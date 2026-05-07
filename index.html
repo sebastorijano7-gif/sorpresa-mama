@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorpresa para Mamá ❤️</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #1a1a1a, #2d0a0a, #4a0000);
+            position: relative;
+        }
+
+        /* CARD */
+        .card {
+            width: 380px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            padding: 30px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            z-index: 100;
+        }
+
+        h1 {
+            color: #ff4d6d;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        /* ===== PASTEL CORREGIDO ===== */
+        .cake {
+            position: relative;
+            width: 220px;
+            height: 180px;
+            margin: 20px auto 30px;
+        }
+
+        .plate {
+            position: absolute;
+            width: 200px;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            animation: fade 1s forwards 2.3s;
+        }
+
+        .layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%) translateY(-80px);
+            height: 35px;
+            border-radius: 4px;
+            opacity: 0;
+            animation: drop 0.8s forwards;
+        }
+
+        .bottom-layer { width: 170px; background: #6d4c41; bottom: 8px; animation-delay: 0.5s; }
+        .middle-layer { width: 140px; background: #795548; bottom: 43px; animation-delay: 1s; }
+        .top-layer { width: 110px; background: #8d6e63; bottom: 78px; animation-delay: 1.5s; }
+
+        .cake-top {
+            position: absolute;
+            width: 110px;
+            height: 15px;
+            background: #fffaf0;
+            border-radius: 10px 10px 0 0;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 113px;
+            opacity: 0;
+            animation: fade .8s forwards 2s;
+            z-index: 4;
+        }
+
+        .drip {
+            position: absolute;
+            width: 12px;
+            background: #fffaf0;
+            border-radius: 0 0 10px 10px;
+            z-index: 5;
+            opacity: 0;
+            animation: fade .8s forwards 2.1s;
+        }
+
+        .drip1 { height: 25px; left: 65px; bottom: 95px; }
+        .drip2 { height: 15px; left: 105px; bottom: 105px; }
+        .drip3 { height: 20px; left: 145px; bottom: 100px; }
+
+        .candle {
+            position: absolute;
+            width: 12px;
+            height: 45px;
+            background: white;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 125px;
+            border-radius: 4px;
+            z-index: 10;
+            opacity: 0;
+            animation: fade 1s forwards 2.5s;
+        }
+
+        .candle::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            background: #ff8fab;
+            top: 10px;
+        }
+
+        .flame {
+            position: absolute;
+            width: 16px;
+            height: 22px;
+            background: gold;
+            border-radius: 50% 50% 20% 20%;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -20px;
+            box-shadow: 0 0 15px gold;
+            animation: flicker .8s infinite;
+        }
+
+        /* ANIMACIONES */
+        @keyframes drop { to { opacity: 1; transform: translateX(-50%) translateY(0); } }
+        @keyframes fade { to { opacity: 1; } }
+        @keyframes flicker {
+            0%, 100% { transform: translateX(-50%) scale(1); }
+            50% { transform: translateX(-50%) scale(1.1); }
+        }
+
+        /* BOTÓN SORPRESA */
+        .btn-sorpresa {
+            background: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, background 0.3s;
+            box-shadow: 0 5px 15px rgba(255, 77, 109, 0.4);
+        }
+
+        .btn-sorpresa:hover {
+            transform: scale(1.1);
+            background: #ff758f;
+        }
+
+        /* FOTOS DINÁMICAS CORREGIDAS */
+        .foto-sorpresa {
+            position: absolute;
+            width: 180px;
+            height: auto;
+            max-height: 240px;
+            object-fit: contain;
+            background: white;
+            border: 6px solid white;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+            z-index: 50;
+            animation: aparecerFoto 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        @keyframes aparecerFoto {
+            from { transform: scale(0) rotate(-20deg); opacity: 0; }
+            to { transform: scale(1) rotate(var(--r)); opacity: 1; }
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff4d6d;
+            opacity: 0.3;
+            animation: floatHeart 5s linear infinite;
+            bottom: -10vh;
+        }
+
+        @keyframes floatHeart {
+            to { transform: translateY(-120vh); }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <h1>¡Feliz Cumpleaños Mamá!</h1>
+
+        <div class="cake">
+            <div class="plate"></div>
+            <div class="layer bottom-layer"></div>
+            <div class="layer middle-layer"></div>
+            <div class="layer top-layer"></div>
+            <div class="cake-top"></div>
+            <div class="drip drip1"></div>
+            <div class="drip drip2"></div>
+            <div class="drip drip3"></div>
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+        </div>
+
+        <p style="font-size: 0.9rem; margin-bottom: 10px;">Presiona el botón para ver algo especial</p>
+        <button class="btn-sorpresa" onclick="lanzarSorpresa()">✨ ¡SORPRESA! ✨</button>
+
+        <div class="signature" style="margin-top: 20px; color: #ff758f; font-weight: bold;">
+            Te amo con todo mi corazón ❤️
+        </div>
+
+        
+
+    </div>
+
+    <script>
+        const fotos = [
+            "img/foto1.jpg", "img/foto2.jpg", "img/foto3.jpg",
+            "img/foto4.jpg", "img/foto5.jpg", "img/foto6.jpg",
+            "img/foto7.jpg", "img/foto8.jpg", "img/foto9.jpg"
+        ];
+
+        function lanzarSorpresa() {
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    const img = document.createElement('img');
+                    img.src = fotos[Math.floor(Math.random() * fotos.length)];
+                    img.className = 'foto-sorpresa';
+
+                    const x = Math.random() * (window.innerWidth - 200);
+                    const y = Math.random() * (window.innerHeight - 220);
+                    const rotation = (Math.random() * 40 - 20) + 'deg';
+
+                    img.style.left = x + 'px';
+                    img.style.top = y + 'px';
+                    img.style.setProperty('--r', rotation);
+
+                    document.body.appendChild(img);
+
+                    setTimeout(() => {
+                        img.style.transition = "opacity 1s";
+                        img.style.opacity = "0";
+                        setTimeout(() => img.remove(), 1000);
+                    }, 6000);
+
+                }, i * 250);
+            }
+        }
+
+        // Generar corazones flotantes
+        setInterval(() => {
+            const h = document.createElement("div");
+            h.className = "heart";
+            h.innerHTML = "❤";
+            h.style.left = Math.random() * 100 + "vw";
+            h.style.fontSize = (Math.random() * 20 + 15) + "px";
+            h.style.animationDuration = (Math.random() * 3 + 3) + "s";
+            document.body.appendChild(h);
+            setTimeout(() => h.remove(), 5000);
+        }, 400);
+    </script>
+
+</body>
+</html>
